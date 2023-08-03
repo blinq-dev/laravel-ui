@@ -1,0 +1,132 @@
+/* input styles */
+.input {
+    @apply
+        /* Default colors */
+        bg-gray-50 text-black font-medium
+        /* Default rounding */
+        rounded-full
+        /* Default size */
+        text-sm px-4 py-2
+        /* Transitions */
+        transition-transform duration-200 ease-in-out
+        /* Prevent flex/grid from resizing the inputs */
+        /* self-baseline */
+        place-self-start
+        ring-0
+        ring-transparent
+    ;
+
+    /* Focus */
+    @apply focus:outline-none focus:transform focus:scale-[1.03];
+
+    /* Disabled */
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+
+    /* Sizes */
+    &.size-sm {
+        @apply text-xs px-3 py-2;
+        @apply ring-[1.7px];
+    }
+
+    &.size-md {
+        /* default */
+        @apply text-sm px-4 py-2; 
+        @apply ring-[2px];
+    }
+
+    &.size-lg {
+        @apply text-base px-5 py-2.5;
+        @apply ring-[2.2px];
+    }
+
+    &.size-xl {
+        @apply text-lg px-6 py-3;
+        @apply ring-[2.6px];
+    }
+
+
+    /* Ring mode */
+    &.mode-ring {
+        /* Set a ring */
+        @apply bg-transparent ring-black text-black;
+    }
+}
+
+
+textarea {
+    &.input {
+            /* Sizes */
+        &.size-sm {
+            @apply py-3;
+            @apply rounded-xl;
+        }
+        
+        &.size-md {
+            /* default */
+            @apply py-3;
+            @apply rounded-2xl;
+        }
+        
+        &.size-lg {
+            @apply py-4;
+            @apply rounded-3xl;
+        }
+        
+        &.size-xl {
+            @apply py-5;
+            @apply rounded-3xl
+        }
+    }
+}
+
+select {
+    &.input {
+        -moz-appearance:none; /* Firefox */
+        -webkit-appearance:none; /* Safari and Chrome */
+        appearance:none;
+
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSI4Ij4KICA8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiMxMzEzMTMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjQ0IiBkPSJNMTMuMSAxLjIgNy4yNyA2LjkgMS40NCAxLjIiLz4KPC9zdmc+);
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - 14px);
+        background-size: 16px;
+        background-position-y: 14px;
+        padding-right: 35px;
+        
+
+        /* Sizes */
+        &.size-sm {
+            background-size: 14px;
+            background-position-x: calc(100% - 13px);
+            background-position-y: 13px;
+            /* default */
+            padding-right: 33px;
+        }
+
+        &.size-md {
+            /* default */
+            padding-right: 35px;
+        }
+
+        &.size-lg {
+            background-position-x: calc(100% - 16px);
+            background-size: 18px;
+            background-position-y: 17px;
+            /* default */
+            padding-right: 40px;
+        }
+
+        &.size-xl {
+            background-position-x: calc(100% - 18px);
+            background-size: 21px;
+            background-position-y: 20px;
+            /* default */
+            padding-right: 48px;
+        }
+
+            /* Ring mode */
+        &.mode-ring {
+            /* Set a ring */
+            /* @apply font-semibold; */
+        }
+    }
+}

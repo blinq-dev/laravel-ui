@@ -1,0 +1,77 @@
+
+.button {
+    @apply
+        /* Default colors */
+        bg-black text-white font-medium 
+        /* Default rounding */
+        rounded-full
+        /* Default size */
+        text-sm px-4 py-2.5
+        /* Transitions */
+        transition-transform duration-100 ease-in-out
+        /* No underline */
+        no-underline
+        /* Prevent flex/grid from resizing the buttons */
+        self-baseline
+        place-self-start
+    ;
+
+    /* Focus */
+    @apply focus:outline-none focus:transform focus:scale-[1.05];
+    /* Hover */
+    @apply hover:transform hover:scale-[1.04];
+    /* Active */
+    @apply active:transform active:scale-[0.99];
+    /* Disabled */
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+
+    /* Sizes */
+    &.size-sm {
+        @apply text-xs px-3 py-1.5;
+    }
+
+    &.size-md {
+        /* default */
+        @apply text-sm px-4 py-2; 
+    }
+
+    &.size-lg {
+        @apply text-base px-5 py-2.5;
+    }
+
+    &.size-xl {
+        @apply text-xl px-6 py-3 !font-medium;
+    }
+
+    /* Ring mode */
+    &.mode-ring {
+        /* Set a ring */
+        @apply bg-transparent ring-2 ring-black text-black font-semibold;
+
+        &.size-sm {
+            @apply ring-[1.7px];
+        }
+    
+        &.size-md {
+            
+        }
+    
+        &.size-lg {
+            @apply ring-[2.2px];
+        }
+    
+        &.size-xl {
+            @apply ring-[2.6px];
+        }
+    }
+
+    /* Text mode */
+    &.mode-text {
+        /* Set it text-only */
+        @apply bg-transparent text-black;
+
+        @apply hover:underline;
+        @apply focus:underline;
+    }
+
+}
