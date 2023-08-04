@@ -1,3 +1,7 @@
 # Changelog
 
 All notable changes to `ui` will be documented in this file.
+
+## v0.0.1 - 2023-08-04
+
+**Full Changelog**: https://github.com/blinq-dev/laravel-ui/commits/v0.0.1
