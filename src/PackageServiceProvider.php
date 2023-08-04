@@ -79,12 +79,10 @@ abstract class PackageServiceProvider extends LaravelPackageToolsPackageServiceP
         $fullName = Str::replace('laravel-', '', $prefix ? ($prefix . "." . $this->package->name) : $this->package->name);
         $view = str_replace(".blade.php", "", $component);
         $view = str_replace("/", ".", $view);
-        $alias = $alias ?? $fullName;
 
         $parentDirectory = str($directory)->afterLast('/');
 
-        // dd($fullName . '::' . $parentDirectory . '.' . $view, $alias . '.' . $view);
-        Blade::component($fullName . '::' . $parentDirectory . '.' . $view, $alias . '.' . $view);
+        Blade::component($fullName . '::' . $parentDirectory . '.' . $view, ($alias ? "$alias." : "") . $view);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

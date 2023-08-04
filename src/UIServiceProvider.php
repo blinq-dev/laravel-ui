@@ -16,8 +16,8 @@ class UIServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('ui')
-            ->hasConfigFile()
-            ->hasViews()
+            ->hasConfigFile('blinq.ui')
+            ->hasViews('blinq.ui')
             // ->hasMigration('create_ui_table')
             ->hasCommand(UICommand::class);
     }
@@ -25,7 +25,7 @@ class UIServiceProvider extends PackageServiceProvider
     public function packageRegistered()
     {
         $this->registerHelperDirectory("Helpers", inGlobalScope: true);
-        $this->registerViewComponentDirectory("../resources/views/components", "ui", null);
+        $this->registerViewComponentDirectory("../resources/views/components", config('blinq.ui.prefix', null), "blinq");
     }
 
     

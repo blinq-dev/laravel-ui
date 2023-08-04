@@ -1,23 +1,23 @@
 :root {
-    --c1-vivid: 247 194 84;
+    --c1-full: 255 190 55;
+    --c1-soft: 255 229 174;
     --c1-pastel: 255 246 228;
-    --c1-soft: 255 228 172;
-    --c1: var(--c1-vivid);
+    --c1: var(--c1-full);
 
-    --c2-vivid: 25 138 152;
-    --c2-pastel: 215 233 235;
-    --c2-soft: 170 210 214;
-    --c2: var(--c2-vivid);
+    --c2-full: 255 139 168;
+    --c2-soft: 255 212 215;
+    --c2-pastel: 255 232 233;
+    --c2: var(--c2-full);
 
-    --c3-vivid: 250 143 148;
-    --c3-pastel: 255 234 235;
-    --c3-soft: 252 197 200;
-    --c3: var(--c3-vivid);
+    --c3-full: 0 202 202;
+    --c3-soft: 182 243 238;
+    --c3-pastel: 222 243 241;
+    --c3: var(--c3-full);
 
-    --c4-vivid: 1 39 124;
+    --c4-full: 40 57 95;
+    --c4-soft: 201 218 255;
     --c4-pastel: 230 235 246;
-    --c4-soft: 201 214 242;
-    --c4: var(--c4-vivid);
+    --c4: var(--c4-full);
 
     --black: 19 19 19;
     --white: 255 255 255;
