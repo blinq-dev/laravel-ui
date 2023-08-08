@@ -47,6 +47,7 @@
 
     /* Ring mode */
     &.mode-ring {
+        appearance: none;
         /* Set a ring */
         @apply bg-transparent ring-black text-black;
     }
