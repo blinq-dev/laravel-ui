@@ -24,7 +24,7 @@ class UIServiceProvider extends PackageServiceProvider
     
     public function packageRegistered()
     {
-        $this->registerHelperDirectory("Helpers", inGlobalScope: true);
+        // $this->registerHelperDirectory("Helpers", inGlobalScope: true);
         $this->registerViewComponentDirectory("../resources/views/components", config('blinq.ui.prefix', null), "blinq");
     }
 
