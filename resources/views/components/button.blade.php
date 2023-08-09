@@ -20,11 +20,6 @@
      */
     'bg' => null,
     /**
-     * @param color icon
-     * @default null
-     */
-    'icon' => null,
-    /**
      * @param color ring
      * @default null
      */
@@ -35,12 +30,12 @@
      */
     'text' => null,
     /**
-     * @param icon|color icon
+     * @param icon icon
      * @default null
      */
     'icon' => null,
     /**
-     * @param tooltip icon
+     * @param tooltip tooltip
      * @default null
      */
     'tooltip' => null,
@@ -75,8 +70,14 @@ $textClass = $text ? "!text-$text" : "";
  * Icon
  ***************/
 $iconClass = $icon ? "text-$icon" : "";
+$iconComponents = explode(' ', $icon);
+$iconColor = ($iconComponents[3] ?? '') ? "text-$iconComponents[3]" : '';
+
 @endphp
 
 <{{ $tag }} {{ $attributes->merge(['class' => "button $sizeClass $ringClass $textClass $bgClass"]) }}>
-    {{ $slot }}
+    @if($icon)
+        <x-icon class='icon icon-left {{ $iconColor }}' :pack='$iconComponents[0] ?? ""' :name='$iconComponents[1] ?? ""' />
+    @endif
+    <span>{{ $slot }}</span>
 </{{ $tag }}>

@@ -1,7 +1,7 @@
 @props([
     /**
-     * @name Input
-     * @description Inputs with different colors and sizes
+     * @name Radio
+     * @description Radio
      */
 
     /**
@@ -19,6 +19,11 @@
      * @default null
      */
     'bg' => null,
+    /**
+     * @param color icon
+     * @default null
+     */
+    'icon' => null,
     /**
      * @param color ring
      * @default 'black'
@@ -72,4 +77,4 @@ $iconClass = $icon ? "text-$icon" : "";
 
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>
+<{{ $tag }} {{ $attributes->merge(['type' => 'radio', 'class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>

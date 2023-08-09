@@ -14,6 +14,7 @@
         /* Prevent flex/grid from resizing the buttons */
         self-baseline
         place-self-start
+        flex
     ;
 
     /* Focus */
@@ -24,6 +25,31 @@
     @apply active:transform active:scale-[0.99];
     /* Disabled */
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
+
+    /* Icons */
+    .icon {
+        @apply w-5 h-5 mr-2;
+    }
+
+    &.size-sm .icon {
+        @apply w-4 h-4 mr-1;
+    }
+
+    &.size-md .icon {
+        @apply w-5 h-5 mr-2;
+    }
+
+    &.size-lg .icon {
+        @apply w-6 h-6 mr-2.5;
+    }
+
+    &.size-xl .icon {
+        @apply w-7 h-7 mr-3;
+    }
+
+
+
+
 
     /* Sizes */
     &.size-sm {

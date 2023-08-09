@@ -1,7 +1,7 @@
 @props([
     /**
-     * @name Input
-     * @description Inputs with different colors and sizes
+     * @name Checkbox
+     * @description Checkbox
      */
 
     /**
@@ -72,4 +72,4 @@ $iconClass = $icon ? "text-$icon" : "";
 
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>
+<{{ $tag }} {{ $attributes->merge(['type' => 'checkbox', 'class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>

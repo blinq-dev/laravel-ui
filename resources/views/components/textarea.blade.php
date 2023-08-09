@@ -1,14 +1,14 @@
 @props([
     /**
-     * @name Input
-     * @description Inputs with different colors and sizes
+     * @name Textarea
+     * @description Textarea with different colors and sizes
      */
 
     /**
      * @param tag tag
      * @default 'button'
      */
-    'tag' => 'input',
+    'tag' => 'textarea',
     /**
      * @param size size
      * @default 'md'
@@ -19,6 +19,11 @@
      * @default null
      */
     'bg' => null,
+    /**
+     * @param color icon
+     * @default null
+     */
+    'icon' => null,
     /**
      * @param color ring
      * @default 'black'
@@ -38,6 +43,11 @@
      * @param string placeholder The placeholder
      * @default null
      */
+     /**
+     * @param bool copyable Copy on select
+     * @default false
+     */
+    'copyable' => false,
 ])
 
 @php
@@ -70,6 +80,8 @@ $textClass = $text ? "!text-$text" : "";
  ***************/
 $iconClass = $icon ? "text-$icon" : "";
 
+$copyable = $copyable ? '@click="$el.select(); $nextTick(() => document.execCommand(\'copy\'))"' : '';
+
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>
+<{{ $tag }} {!! $copyable !!} {{ $attributes->merge(['class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>

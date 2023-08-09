@@ -1,14 +1,14 @@
 @props([
     /**
-     * @name Input
-     * @description Inputs with different colors and sizes
+     * @name Select
+     * @description Select
      */
 
     /**
      * @param tag tag
      * @default 'button'
      */
-    'tag' => 'input',
+    'tag' => 'select',
     /**
      * @param size size
      * @default 'md'

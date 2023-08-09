@@ -22,6 +22,14 @@ bg-gray
 !bg-gray
 ring-gray
 !ring-gray
+size-gray-50
+!size-gray-50
+text-gray-50
+!text-gray-50
+bg-gray-50
+!bg-gray-50
+ring-gray-50
+!ring-gray-50
 size-c1
 !size-c1
 text-c1
