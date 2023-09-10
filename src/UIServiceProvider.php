@@ -4,9 +4,45 @@ namespace Blinq\UI;
 
 use Spatie\LaravelPackageTools\Package;
 use Blinq\UI\Commands\UICommand;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\Blade;
 
 class UIServiceProvider extends PackageServiceProvider
 {
+    public function register(): void
+    {
+        $this->registerConfig();
+        $this->registerViews();
+        $this->registerRoutes();
+        // $this->registerCommands();
+        // $this->registerBladeComponents();
+
+        $this->registerHelperDirectory("Helpers", inGlobalScope: true);
+        $this->registerViewComponentDirectory("../resources/views/components", config('blinq-ui.prefix', null), "blinq");
+    }
+    
+    public function boot()
+    {
+        $this->app->scoped(UI::class, function (Application $app) {
+            return new UI();
+        });
+    }
+
+    protected function registerConfig()
+    {
+        $config = __DIR__.'/../config/blinq-ui.php';
+
+        $this->mergeConfigFrom($config, 'blinq-ui');
+        $this->publishes([$config => config_path('blinq-ui.php')], ['blinq-ui', 'blinq-ui:config']);
+    }
+
+    public function registerCommands()
+    {
+        // $this->commands([
+        //     Commands\DownloadCommand::class,
+        // ]);
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -16,20 +52,15 @@ class UIServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('ui')
-            ->hasConfigFile('blinq.ui')
-            ->hasViews('blinq.ui')
+            ->hasConfigFile('blinq-ui')
+            ->hasViews('blinq-ui')
             // ->hasMigration('create_ui_table')
             ->hasCommand(UICommand::class);
 
         $this->registerViews(); 
         $this->registerRoutes();
     }
-    
-    public function packageRegistered()
-    {
-        $this->registerHelperDirectory("Helpers", inGlobalScope: true);
-        $this->registerViewComponentDirectory("../resources/views/components", config('blinq.ui.prefix', null), "blinq");
-    }
+   
 
     protected function registerViews() {
         $views = __DIR__.'/../resources/views';

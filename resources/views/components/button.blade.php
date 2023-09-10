@@ -15,20 +15,10 @@
      */
     'size' => 'md',
     /**
-     * @param color bg
+     * @param color colors
      * @default null
      */
-    'bg' => null,
-    /**
-     * @param color ring
-     * @default null
-     */
-    'ring' => null,
-    /**
-     * @param color text
-     * @default null
-     */
-    'text' => null,
+    'colors' => null,
     /**
      * @param icon icon
      * @default null
@@ -52,32 +42,30 @@ $sizeClass = [
     'xl' => 'size-xl',
 ][$size];
 
-/***************
- * Bg
- ***************/
-$bgClass = $bg ? "!bg-$bg" : "";
+$colorClass = str($colors)->contains('ring') ? 'mode-ring ' . $colors : $colors;
 
-/***************
- * Ring
- ***************/
-$ringClass = $ring ? "mode-ring !ring-$ring" : "";
-
-/***************
- * Text
- ***************/
-$textClass = $text ? "!text-$text" : "";
 /***************
  * Icon
  ***************/
-$iconClass = $icon ? "text-$icon" : "";
+$iconClass = $icon;
 $iconComponents = explode(' ', $icon);
-$iconColor = ($iconComponents[3] ?? '') ? "text-$iconComponents[3]" : '';
+$iconColor = $iconComponents[2] ?? '';
 
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => "button $sizeClass $ringClass $textClass $bgClass"]) }}>
+{{-- Tag --}}
+<{{ $tag }} {{ $attributes->merge(['class' => "button $sizeClass $colorClass"]) }}>
+    {{-- Left --}}
     @if($icon)
         <x-icon class='icon icon-left {{ $iconColor }}' :pack='$iconComponents[0] ?? ""' :name='$iconComponents[1] ?? ""' />
     @endif
+    @if(isset($left))
+        {{ $left }}
+    @endif
+    {{-- Slot --}}
     <span>{{ $slot }}</span>
+    {{-- Right --}}
+    @if(isset($right))
+        {{ $right }}
+    @endif
 </{{ $tag }}>

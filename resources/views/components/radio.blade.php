@@ -15,25 +15,10 @@
      */
     'size' => 'md',
     /**
-     * @param color bg
+     * @param color colors
      * @default null
      */
-    'bg' => null,
-    /**
-     * @param color icon
-     * @default null
-     */
-    'icon' => null,
-    /**
-     * @param color ring
-     * @default 'black'
-     */
-    'ring' => 'black',
-    /**
-     * @param color text
-     * @default null
-     */
-    'text' => null,
+    'colors' => null,
     /**
      * @param icon icon
      * @default null
@@ -57,24 +42,24 @@ $sizeClass = [
 ][$size];
 
 /***************
- * Bg
+ * Size
  ***************/
-$bgClass = $bg ? "!bg-$bg" : "";
+$sizeClass = [
+    'sm' => 'size-sm',
+    'md' => 'size-md',
+    'lg' => 'size-lg',
+    'xl' => 'size-xl',
+][$size];
 
-/***************
- * Ring
- ***************/
-$ringClass = $ring ? "mode-ring !ring-$ring" : "";
+$colorClass = str($colors)->contains('border') ? 'mode-border ' . $colors : $colors;
 
-/***************
- * Text
- ***************/
-$textClass = $text ? "!text-$text" : "";
 /***************
  * Icon
  ***************/
-$iconClass = $icon ? "text-$icon" : "";
+$iconClass = $icon;
+$iconComponents = explode(' ', $icon);
+$iconColor = $iconComponents[2] ?? '';
 
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['type' => 'radio', 'class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>
+<{{ $tag }} {{ $attributes->merge(['type' => 'radio', 'class' => "input $sizeClass $colorClass"]) }}>{{ $slot }}</{{ $tag }}>

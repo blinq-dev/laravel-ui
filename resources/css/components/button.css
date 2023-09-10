@@ -2,7 +2,7 @@
 .button {
     @apply
         /* Default colors */
-        bg-black text-white font-medium 
+        font-medium 
         /* Default rounding */
         rounded-full
         /* Default size */
@@ -73,7 +73,7 @@
     &.mode-ring {
         appearance: none;
         /* Set a ring */
-        @apply bg-transparent ring-2 ring-black text-black font-semibold;
+        @apply bg-transparent ring-2 font-semibold;
 
         &.size-sm {
             @apply ring-[1.7px];
@@ -95,7 +95,7 @@
     /* Text mode */
     &.mode-text {
         /* Set it text-only */
-        @apply bg-transparent text-black;
+        @apply bg-transparent;
 
         @apply hover:underline;
         @apply focus:underline;

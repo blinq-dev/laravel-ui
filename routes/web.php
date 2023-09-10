@@ -19,7 +19,7 @@ Route::post('/blinq-ui/docs/example/{component}', function ($component) {
     // Turn props into attribute string
     $attributes = str(collect($props)->map(function($value, $key) {
         $key = preg_replace("/[^a-zA-Z0-9\-]+/", "", $key);
-        $value = preg_replace("/[^a-zA-Z0-9\.\-!? \/_]+/", "", $value);
+        $value = preg_replace("/[^a-zA-Z0-9\.\-!? \/_:]+/", "", $value);
 
         if ($value === "") {
             return "";

@@ -15,20 +15,10 @@
      */
     'size' => 'md',
     /**
-     * @param color bg
+     * @param color colors
      * @default null
      */
-    'bg' => null,
-    /**
-     * @param color ring
-     * @default 'black'
-     */
-    'ring' => 'black',
-    /**
-     * @param color text
-     * @default null
-     */
-    'text' => null,
+    'colors' => null,
     /**
      * @param icon icon
      * @default null
@@ -51,25 +41,15 @@ $sizeClass = [
     'xl' => 'size-xl',
 ][$size];
 
-/***************
- * Bg
- ***************/
-$bgClass = $bg ? "!bg-$bg" : "";
+$colorClass = str($colors)->contains('border') ? 'mode-border ' . $colors : $colors;
 
-/***************
- * Ring
- ***************/
-$ringClass = $ring ? "mode-ring !ring-$ring" : "";
-
-/***************
- * Text
- ***************/
-$textClass = $text ? "!text-$text" : "";
 /***************
  * Icon
  ***************/
-$iconClass = $icon ? "text-$icon" : "";
+$iconClass = $icon;
+$iconComponents = explode(' ', $icon);
+$iconColor = $iconComponents[2] ?? '';
 
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>
+<{{ $tag }} {{ $attributes->merge(['class' => "input $sizeClass $colorClass"]) }}>{{ $slot }}</{{ $tag }}>

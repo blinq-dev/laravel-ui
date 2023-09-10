@@ -3,18 +3,22 @@
 namespace Blinq\UI;
 
 use Illuminate\Support\Facades\Blade;
-use Spatie\LaravelPackageTools\PackageServiceProvider as LaravelPackageToolsPackageServiceProvider;
-use Spatie\LaravelPackageTools\Package;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\ServiceProvider;
 use Spatie\LaravelPackageTools\Exceptions\InvalidPackage;
 use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 
-abstract class PackageServiceProvider extends LaravelPackageToolsPackageServiceProvider
+abstract class PackageServiceProvider extends ServiceProvider
 {
+    public function getBasePath($subdir = null)
+    {
+        return __DIR__ . "/" . ($subdir ? $subdir . "/" : "");
+    }
+
     public function registerHelperDirectory(string $directory = null, bool $inGlobalScope = true)
     {
-        $directory = $this->package->basePath($directory ?? 'Helpers');
+        $directory = $this->getBasePath($directory ?? 'Helpers');
 
         if (!File::exists($directory)) throw (new InvalidPackage("The helper directory `{$directory}` does not exist"));
 
@@ -37,7 +41,7 @@ abstract class PackageServiceProvider extends LaravelPackageToolsPackageServiceP
 
     public function registerMacroDirectory(string $directory)
     {
-        $directory = $this->package->basePath($directory ?? 'Helpers');
+        $directory = $this->getBasePath($directory ?? 'Helpers');
 
         if (!File::exists($directory)) throw (new InvalidPackage("The macro directory `{$directory}` does not exist"));
         
@@ -56,12 +60,11 @@ abstract class PackageServiceProvider extends LaravelPackageToolsPackageServiceP
 
     public function registerViewComponentDirectory(string $directory, string|null $alias = null, string $prefix = null)
     {
-        $directory = $this->package->basePath($directory);
+        $directory = $this->getBasePath($directory);
         
         $this->callAfterResolving(BladeCompiler::class, function () use($directory, $alias, $prefix) {
             foreach (File::allFiles($directory) as $file) {
                 $component = $file->getRelativePathname();
-                
                 
                 $this->registerViewComponent($component, $directory, $alias, $prefix);
             }
@@ -76,11 +79,11 @@ abstract class PackageServiceProvider extends LaravelPackageToolsPackageServiceP
      */
     protected function registerViewComponent(string $component, string $directory, string|null $alias = null, string $prefix = null)
     {
-        $fullName = Str::replace('laravel-', '', $prefix ? ($prefix . "." . $this->package->name) : $this->package->name);
+        $fullName = "blinq-ui";
         $view = str_replace(".blade.php", "", $component);
         $view = str_replace("/", ".", $view);
 
-        $parentDirectory = str($directory)->afterLast('/');
+        $parentDirectory = (string) str($directory)->replaceLast("/", "")->afterLast("/");
 
         Blade::component($fullName . '::' . $parentDirectory . '.' . $view, ($alias ? "$alias." : "") . $view);
 

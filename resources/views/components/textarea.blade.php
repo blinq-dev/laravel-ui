@@ -15,25 +15,10 @@
      */
     'size' => 'md',
     /**
-     * @param color bg
+     * @param color colors
      * @default null
      */
-    'bg' => null,
-    /**
-     * @param color icon
-     * @default null
-     */
-    'icon' => null,
-    /**
-     * @param color ring
-     * @default 'black'
-     */
-    'ring' => 'black',
-    /**
-     * @param color text
-     * @default null
-     */
-    'text' => null,
+    'colors' => null,
     /**
      * @param icon icon
      * @default null
@@ -54,6 +39,9 @@
 /***************
  * Size
  ***************/
+/***************
+ * Size
+ ***************/
 $sizeClass = [
     'sm' => 'size-sm',
     'md' => 'size-md',
@@ -61,27 +49,19 @@ $sizeClass = [
     'xl' => 'size-xl',
 ][$size];
 
-/***************
- * Bg
- ***************/
-$bgClass = $bg ? "!bg-$bg" : "";
+$isRing = false;
 
-/***************
- * Ring
- ***************/
-$ringClass = $ring ? "mode-ring !ring-$ring" : "";
+$colorClass = str($colors)->contains('border') ? 'mode-border ' . $colors : $colors;
 
-/***************
- * Text
- ***************/
-$textClass = $text ? "!text-$text" : "";
 /***************
  * Icon
  ***************/
-$iconClass = $icon ? "text-$icon" : "";
+$iconClass = $icon;
+$iconComponents = explode(' ', $icon);
+$iconColor = $iconComponents[2] ?? '';
 
 $copyable = $copyable ? '@click="$el.select(); $nextTick(() => document.execCommand(\'copy\'))"' : '';
 
 @endphp
 
-<{{ $tag }} {!! $copyable !!} {{ $attributes->merge(['class' => "input $sizeClass $ringClass $textClass $bgClass"]) }}>{{ $slot }}</{{ $tag }}>
+<{{ $tag }} {!! $copyable !!} {{ $attributes->merge(['class' => "input $sizeClass $colorClass"]) }}>{{ $slot }}</{{ $tag }}>

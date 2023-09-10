@@ -3,6 +3,7 @@
 ## Dependecies:
 - Tailwind CSS
 - Alpine JS
+- Blinq/Icons
 
 ## When you use Tailwind CSS
 

@@ -4,7 +4,7 @@
     
     @apply
         /* Default colors */
-        text-black font-medium
+        font-medium
         /* Default rounding */
         rounded-full
         /* Default size */
@@ -14,14 +14,12 @@
         /* Prevent flex/grid from resizing the inputs */
         /* self-baseline */
         place-self-start
-        ring-0
-        ring-transparent
     ;
 
-    /* @apply bg-transparent ring-black text-black; */
+    /* @apply bg-transparent; */
 
     /* Focus */
-    @apply focus:outline-none focus:transform focus:scale-[1.03];
+    @apply focus:outline-none focus:transform;
 
     /* Disabled */
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
@@ -29,37 +27,36 @@
     /* Sizes */
     &.size-sm {
         @apply text-xs px-3 py-2;
-        @apply ring-[1.7px];
+        @apply border-[1.7px];
     }
 
     &.size-md {
         /* default */
         @apply text-sm px-4 py-2; 
-        @apply ring-[2px];
+        @apply border-[2px];
     }
 
     &.size-lg {
         @apply text-base px-5 py-2.5;
-        @apply ring-[2.2px];
+        @apply border-[2.2px];
     }
 
     &.size-xl {
         @apply text-lg px-6 py-3;
-        @apply ring-[2.6px];
+        @apply border-[2.6px];
     }
 
-
-    /* Ring mode */
-    &.mode-ring {
+    /* border mode */
+    &.mode-border {
         appearance: none;
-        /* Set a ring */
-        @apply bg-transparent ring-black text-black;
+        /* Set a border */
+        @apply bg-transparent;
     }
 }
 
 input[type='checkbox'] {
     &.input {
-        @apply p-0 w-5 h-5 grow-0 shrink-0 text-white cursor-pointer rounded-md ring-0;
+        @apply p-0 w-5 h-5 grow-0 shrink-0 cursor-pointer rounded-md border-0;
 
         /* Sizes */
         &.size-sm {
@@ -79,8 +76,8 @@ input[type='checkbox'] {
             @apply w-7 h-7;
         }
 
-        &.mode-ring {
-            /* Set a ring */
+        &.mode-border {
+            /* Set a border */
             @apply border-2 border-black;
         }
 
@@ -92,7 +89,7 @@ input[type='checkbox'] {
 
 input[type='radio'] {
     &.input {
-        @apply p-0 w-5 h-5 grow-0 shrink-0 text-white cursor-pointer rounded-full  ring-0;
+        @apply p-0 w-5 h-5 grow-0 shrink-0 cursor-pointer rounded-full  border-0;
 
         /* Sizes */
         &.size-sm {
@@ -112,8 +109,8 @@ input[type='radio'] {
             @apply w-7 h-7;
         }
 
-        &.mode-ring {
-            /* Set a ring */
+        &.mode-border {
+            /* Set a border */
             @apply border-2 border-black;
         }
 
@@ -194,9 +191,9 @@ select {
             padding-right: 48px;
         }
 
-            /* Ring mode */
-        &.mode-ring {
-            /* Set a ring */
+        /* border mode */
+        &.mode-border {
+            /* Set a border */
             /* @apply font-semibold; */
         }
     }
