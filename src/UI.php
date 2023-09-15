@@ -10,4 +10,9 @@ class UI
     {
         $this->notify = new Notify();
     }
+
+    public function notify() : Notify
+    {
+        return $this->notify;
+    }
 }

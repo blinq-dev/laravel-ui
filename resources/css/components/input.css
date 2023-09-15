@@ -78,7 +78,7 @@ input[type='checkbox'] {
 
         &.mode-border {
             /* Set a border */
-            @apply border-2 border-black;
+            @apply border border-black;
         }
 
         &:checked {
@@ -111,7 +111,7 @@ input[type='radio'] {
 
         &.mode-border {
             /* Set a border */
-            @apply border-2 border-black;
+            @apply border border-black;
         }
 
         &:checked {
