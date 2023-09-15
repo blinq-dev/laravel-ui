@@ -48,8 +48,8 @@ $colorClass = str($colors)->contains('ring') ? 'mode-ring ' . $colors : $colors;
  * Icon
  ***************/
 $iconClass = $icon;
-$iconComponents = explode(' ', $icon);
-$iconColor = $iconComponents[2] ?? '';
+$iconId = str($icon)->before(' ');
+$iconColor = str($icon)->after(' ');
 
 @endphp
 
@@ -57,7 +57,7 @@ $iconColor = $iconComponents[2] ?? '';
 <{{ $tag }} {{ $attributes->merge(['class' => "button $sizeClass $colorClass"]) }}>
     {{-- Left --}}
     @if($icon)
-        <x-icon class='icon icon-left {{ $iconColor }}' :pack='$iconComponents[0] ?? ""' :name='$iconComponents[1] ?? ""' />
+        <x-icon class='icon icon-left {{ $iconColor }}' :id='$iconId' />
     @endif
     @if(isset($left))
         {{ $left }}
