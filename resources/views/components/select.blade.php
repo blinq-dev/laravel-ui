@@ -14,11 +14,11 @@
      * @default 'md'
      */
     'size' => 'md',
-        /**
-     * @param color colors
+    /**
+     * @param class class
      * @default null
      */
-    'colors' => null,
+    'class' => null,
     /**
      * @param icon icon
      * @default null
@@ -39,20 +39,42 @@ $sizeClass = [
     'md' => 'size-md',
     'lg' => 'size-lg',
     'xl' => 'size-xl',
-][$size];
+][$size] ?? 'size-md';
 
 /***************
- * Colors
+ * Class
  ***************/
-$colorClass = str($colors)->contains('border') ? 'mode-border ' . $colors : $colors;
+$class = str($class)->contains('border') ? 'mode-border ' . $class : $class;
 
+if (!str($class)->contains('border') && !str($class)->contains('bg')) {
+    $class = 'mode-border ' . $class;
+}
 /***************
  * Icon
  ***************/
-$iconClass = $icon;
-$iconComponents = explode(' ', $icon);
-$iconColor = $iconComponents[2] ?? '';
+$iconKey = $attributes->whereStartsWith('icon')->keys()->first();
+$iconValue = $attributes->get($iconKey);
+$isRight = str($iconKey)->contains('right');
+
+$iconClass = $iconValue;
+
+$iconId = str($iconValue)->contains(' ') ? str($iconValue)->before(' ') : $iconValue;
+$iconColor = str($iconValue)->contains(' ') ? str($iconValue)->after(' ') : null;
 
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => "input $sizeClass $colorClass"]) }}>{{ $slot }}</{{ $tag }}>
+<div {{ $attributes->namespace('wrapper')->merge(['class' => "select-wrapper relative flex items-center $sizeClass $class"]) }}>
+    @if($iconId && !$isRight)
+    <x-icon class='ml-4 icon grow-0 shrink-0 icon-left {{ $iconColor }}' :id='$iconId' />
+    @endif
+    @if(isset($left))
+        {{ $left }}
+    @endif
+    <{{ $tag }} {{ $attributes->root()->except('class')->merge(['class' => "select"]) }} {{ $attributes->namespace('input') }}>{{ $slot }}</{{ $tag }}>
+    @if(isset($right))
+        {{ $right }}
+    @endif
+    @if($iconId && $isRight)
+    <x-icon class='!-ml-4 !mr-4 icon grow-0 shrink-0 icon-right {{ $iconColor }}' :id='$iconId' />
+    @endif
+</div>

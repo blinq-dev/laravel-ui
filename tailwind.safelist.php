@@ -1,24 +1,32 @@
 <?php
 
-$types = include_once __DIR__ . "/resources/views/components/types.php";
-
+$weights = ['', '100', '200', '300', '400', '500'];
+$colors = ['c0', 'c1', 'c2', 'c3', 'c4'];
 $classes = [
-    "size",
-    "!size",
     "text",
     "!text",
     "bg",
     "!bg",
-    "ring",
-    "!ring"
+    "border",
+    "!border"
 ];
 
 $output = [];
 
-foreach($types['color']['options'] ?? [] as $color) {
-    foreach($classes as $class) {
-        $output[] = "{$class}-{$color}";
+foreach($classes as $class) {
+    foreach($colors as $color) {
+        foreach($weights as $weight) {
+            if($weight) {
+                $output[] = "$class-$color-$weight";
+            }
+            else {
+                $output[] = "$class-$color";
+            }
+        }
     }
+
+    $output[] = "$class-white";
+    $output[] = "$class-black";
 }
 
 // write to tailwind.safelist.txt

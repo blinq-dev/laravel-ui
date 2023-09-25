@@ -15,10 +15,10 @@
      */
     'size' => 'md',
     /**
-     * @param color colors
+     * @param class class
      * @default null
      */
-    'colors' => null,
+    'class' => null,
     /**
      * @param icon icon
      * @default null
@@ -40,23 +40,32 @@ $sizeClass = [
     'md' => 'size-md',
     'lg' => 'size-lg',
     'xl' => 'size-xl',
-][$size];
+][$size] ?? 'size-md';
 
-$colorClass = str($colors)->contains('ring') ? 'mode-ring ' . $colors : $colors;
+$class = str($class)->contains('border') ? 'mode-border ' . $class : $class;
+
+if (!str($class)->contains('border') && !str($class)->contains('bg')) {
+    $class .= ' bg-c0-200';
+}
 
 /***************
  * Icon
  ***************/
-$iconClass = $icon;
-$iconId = str($icon)->before(' ');
-$iconColor = str($icon)->after(' ');
+$iconKey = $attributes->whereStartsWith('icon')->keys()->first();
+$iconValue = $attributes->get($iconKey);
+$isRight = str($iconKey)->contains('right');
+
+$iconClass = $iconValue;
+
+$iconId = str($iconValue)->contains(' ') ? str($iconValue)->before(' ') : $iconValue;
+$iconColor = str($iconValue)->contains(' ') ? str($iconValue)->after(' ') : null;
 
 @endphp
 
 {{-- Tag --}}
-<{{ $tag }} {{ $attributes->merge(['class' => "button $sizeClass $colorClass"]) }}>
+<{{ $tag }} {{ $attributes->merge(['class' => "button $sizeClass $class", 'type' => 'button']) }}>
     {{-- Left --}}
-    @if($icon)
+    @if($iconId && !$isRight)
         <x-icon class='icon icon-left {{ $iconColor }}' :id='$iconId' />
     @endif
     @if(isset($left))
@@ -67,5 +76,8 @@ $iconColor = str($icon)->after(' ');
     {{-- Right --}}
     @if(isset($right))
         {{ $right }}
+    @endif
+    @if($iconId && $isRight)
+        <x-icon class='icon icon-right {{ $iconColor }}' :id='$iconId' />
     @endif
 </{{ $tag }}>

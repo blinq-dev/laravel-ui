@@ -10,16 +10,16 @@ Route::post('/blinq-ui/docs/example/{component}', function ($component) {
     // Check if $slot is set
     if (isset($props['$slot'])) {
         $slot = $props['$slot'];
-        $slot = preg_replace("/[^a-zA-Z0-9\.\-!? ]+/", "", $slot);
+        $slot = preg_replace("/[^a-zA-Z0-9\.\-!?@ ]+/", "", $slot);
         unset($props['$slot']);
     }
 
-    $component = preg_replace("/[^a-zA-Z0-9\.]+/", "", $component);
+    $component = preg_replace("/[^a-zA-Z0-9\.@]+/", "", $component);
 
     // Turn props into attribute string
     $attributes = str(collect($props)->map(function($value, $key) {
         $key = preg_replace("/[^a-zA-Z0-9\-]+/", "", $key);
-        $value = preg_replace("/[^a-zA-Z0-9\.\-!? \/_:]+/", "", $value);
+        $value = preg_replace("/[^a-zA-Z0-9\.\-!?@ \/_:]+/", "", $value);
 
         if ($value === "") {
             return "";
@@ -40,8 +40,11 @@ Route::post('/blinq-ui/docs/example/{component}', function ($component) {
     $code = "<x-$component$attributes>$slot</x-$component>";
     $renderedComponent = Blade::render("$code");
 
+    $cleanedComponent = preg_replace("/\s*<!--.*?-->\s*/s", "", $renderedComponent);  // Remove comments
+    $cleanedComponent = preg_replace("/>\s+</s", "><", $cleanedComponent);  // Remove whitespace between tags
+
     return response()->json([
         'code' => $code,
-        'result' => $renderedComponent,
+        'result' => $cleanedComponent,
     ]);
 });

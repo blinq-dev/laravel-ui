@@ -15,19 +15,10 @@
      */
     'size' => 'md',
     /**
-     * @param color colors
+     * @param class class
      * @default null
      */
-    'colors' => null,
-    /**
-     * @param icon icon
-     * @default null
-     */
-    'icon' => null,
-    /**
-     * @param string placeholder The placeholder
-     * @default null
-     */
+    'class' => null,
 ])
 
 @php
@@ -39,17 +30,23 @@ $sizeClass = [
     'md' => 'size-md',
     'lg' => 'size-lg',
     'xl' => 'size-xl',
-][$size];
+][$size] ?? 'size-md';
 
-$colorClass = str($colors)->contains('border') ? 'mode-border ' . $colors : $colors;
+$class = str($class)->contains('border') ? 'mode-border ' . $class : $class;
 
-/***************
- * Icon
- ***************/
-$iconClass = $icon;
-$iconComponents = explode(' ', $icon);
-$iconColor = $iconComponents[2] ?? '';
+if (!str($class)->contains('border') && !str($class)->contains('bg')) {
+    $class = 'mode-border ' . $class;
+}
+
 
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['type' => 'checkbox', 'class' => "input $sizeClass $colorClass"]) }}>{{ $slot }}</{{ $tag }}>
+<div {{ $attributes->namespace('wrapper')->merge(['class' => "checkbox-wrapper $sizeClass $class"]) }}>
+    @if(isset($left))
+        {{ $left }}
+    @endif
+    <{{ $tag }} {{ $attributes->root()->except('class')->merge(['class' => "checkbox", 'type' => 'checkbox']) }} {{ $attributes->namespace('input') }}>{{ $slot }}</{{ $tag }}>
+    @if(isset($right))
+        {{ $right }}
+    @endif
+</div>

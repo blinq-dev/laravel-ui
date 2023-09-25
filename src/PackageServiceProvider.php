@@ -41,7 +41,7 @@ abstract class PackageServiceProvider extends ServiceProvider
 
     public function registerMacroDirectory(string $directory)
     {
-        $directory = $this->getBasePath($directory ?? 'Helpers');
+        $directory = $this->getBasePath($directory ?? 'Macros');
 
         if (!File::exists($directory)) throw (new InvalidPackage("The macro directory `{$directory}` does not exist"));
         

@@ -15,15 +15,10 @@
      */
     'size' => 'md',
     /**
-     * @param color colors
+     * @param class class
      * @default null
      */
-    'colors' => null,
-    /**
-     * @param icon icon
-     * @default null
-     */
-    'icon' => null,
+    'class' => null,
     /**
      * @param string placeholder The placeholder
      * @default null
@@ -39,27 +34,25 @@ $sizeClass = [
     'md' => 'size-md',
     'lg' => 'size-lg',
     'xl' => 'size-xl',
-][$size];
+][$size] ?? 'size-md';
+
 
 /***************
- * Size
+ * Class
  ***************/
-$sizeClass = [
-    'sm' => 'size-sm',
-    'md' => 'size-md',
-    'lg' => 'size-lg',
-    'xl' => 'size-xl',
-][$size];
+$class = str($class)->contains('border') ? 'mode-border ' . $class : $class;
 
-$colorClass = str($colors)->contains('border') ? 'mode-border ' . $colors : $colors;
-
-/***************
- * Icon
- ***************/
-$iconClass = $icon;
-$iconComponents = explode(' ', $icon);
-$iconColor = $iconComponents[2] ?? '';
-
+if (!str($class)->contains('border') && !str($class)->contains('bg')) {
+    $class = 'mode-border ' . $class;
+}
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['type' => 'radio', 'class' => "input $sizeClass $colorClass"]) }}>{{ $slot }}</{{ $tag }}>
+<div {{ $attributes->namespace('wrapper')->merge(['class' => "radio-wrapper relative flex items-center $sizeClass $class"]) }}>
+    @if(isset($left))
+        {{ $left }}
+    @endif
+    <{{ $tag }} {{ $attributes->root()->except('class')->merge(['class' => "radio", 'type' => 'radio']) }} {{ $attributes->namespace('input') }}>{{ $slot }}</{{ $tag }}>
+    @if(isset($right))
+        {{ $right }}
+    @endif
+</div>

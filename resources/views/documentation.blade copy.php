@@ -70,7 +70,7 @@
 
                         @if ($typeType === 'options')
                             <label class="text-left text-sm mr-4 w-32 shrink-0">{{ $name }}</label>
-                            <x-select x-model="props.{{ $name }}" size="sm" bg="" ring="gray-50 grow">
+                            <x-select x-model="props.{{ $name }}" size="sm">
                                 @foreach ($typeOptions as $option)
                                     <option value="{{ $option }}">{{ $option }}</option>
                                 @endforeach
@@ -79,7 +79,7 @@
                             </x-select>
                         @else
                             <label class="text-left text-sm mr-4 w-32 shrink-0">{{ $name }}</label>
-                            <x-input x-model="props.{{ $name }}" size="sm" bg="" ring="gray-50 grow" />
+                            <x-input x-model="props.{{ $name }}" size="sm" />
                         @endif
                     </div>
                 @endforeach

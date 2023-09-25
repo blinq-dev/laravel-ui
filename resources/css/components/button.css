@@ -47,10 +47,6 @@
         @apply w-7 h-7 mr-3;
     }
 
-
-
-
-
     /* Sizes */
     &.size-sm {
         @apply text-xs px-3 py-1.5;
@@ -69,10 +65,10 @@
         @apply text-xl px-6 py-3 !font-medium;
     }
 
-    /* Ring mode */
-    &.mode-ring {
+    /* border mode */
+    &.mode-border {
         appearance: none;
-        /* Set a ring */
+        /* Set a border */
         @apply bg-transparent ring-2 font-semibold;
 
         &.size-sm {

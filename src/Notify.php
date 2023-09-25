@@ -17,7 +17,7 @@ class Notify
             ->setStyle($style)
             ->setTitle($title)
             ->setClosable(false)
-            ->addButton('OK', $action ?? 'open = false', 'bg-yellow')
+            ->addButton('OK', $action ?? 'open = false', 'bg-c1')
             ->when($message, fn($builder) => $builder->setMessage($message));
     }
 
@@ -32,7 +32,7 @@ class Notify
             ->setStyle('confirm')
             ->setTitle($title)
             ->setClosable(false)
-            ->addButton('Yes', $action ?? 'open = false', 'bg-yellow')
+            ->addButton('Yes', $action ?? 'open = false', 'bg-c1')
             ->addButton('No', 'open = false', '')
             ->when($message, fn($builder) => $builder->setMessage($message));
     }

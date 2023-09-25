@@ -1,6 +1,22 @@
 <?php
 
-$colors = ['black', 'white', 'gray', 'gray-50', 'c1', 'c2', 'c3', 'c4', 'c1-pastel', 'c1-soft', 'c1-full', 'c2-pastel', 'c2-soft', 'c2-full', 'c3-pastel', 'c3-soft', 'c3-full', 'c4-pastel', 'c4-soft', 'c4-full'];
+$weights = ['', '100...500'];
+$colors = ['c0...c4'];
+$combinations = [];
+
+foreach($colors as $color) {
+    foreach($weights as $weight) {
+        if($weight) {
+            $combinations[] = "$color-$weight";
+        }
+        else {
+            $combinations[] = $color;
+        }
+    }
+}
+
+$combinations[] = 'black';
+$combinations[] = 'white';
 
 return [
     'tag' => [
@@ -16,22 +32,22 @@ return [
         ],
         'description' => 'The size of the component. For example sm, md, lg, xl.',
     ],
-    'color' => [
+    'class' => [
         'type' => 'string',
-        'example' => '<x-#component# #prop#="c1-pastel" />',
+        'example' => '<x-#component# #prop#="c1-100" />',
         'options' => [
-            ...collect($colors)->map(fn($x) => "bg-$x")->toArray(),
-            ...collect($colors)->map(fn($x) => "text-$x")->toArray(),
-            ...collect($colors)->map(fn($x) => "border-$x")->toArray(),
+            ...array_map(fn($x) => "bg-$x", $combinations),
+            ...array_map(fn($x) => "text-$x", $combinations),
+            ...array_map(fn($x) => "border-$x", $combinations),
         ],
-        'description' => 'The color. For example black, white, gray, c1-pastel etc.',
+        'description' => 'Color/border classes. For example black, white, gray, c1-100 etc.',
     ],
     'icon' => [
         'type' => 'string',
         'modifiers' => [
             'left', 'right'
         ],
-        'example' => '<x-#component# #prop#="material/default person_add_alt text-black" />',
+        'example' => '<x-#component# #prop#="person_add_alt@material/default text-black" />',
         'description' => 'The icon to use for the component. {pack} {name} {color}',
     ],
     'tooltip' => [
