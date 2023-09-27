@@ -2,6 +2,10 @@
 
 All notable changes to `ui` will be documented in this file.
 
+## v0.0.7 - 2023-09-27
+
+v0.0.7
+
 ## v0.0.6 - 2023-09-27
 
 **Full Changelog**: https://github.com/blinq-dev/laravel-ui/compare/v0.0.5...v0.0.6
