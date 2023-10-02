@@ -19,6 +19,7 @@ class UIServiceProvider extends PackageServiceProvider
 
         $this->registerHelperDirectory("Helpers", inGlobalScope: true);
         $this->registerMacroDirectory("Macros/ComponentAttributeBag");
+   
         $this->registerViewComponentDirectory("../resources/views/components", config('blinq-ui.prefix', null), "blinq");
     }
     

@@ -65,7 +65,7 @@ abstract class PackageServiceProvider extends ServiceProvider
         $this->callAfterResolving(BladeCompiler::class, function () use($directory, $alias, $prefix) {
             foreach (File::allFiles($directory) as $file) {
                 $component = $file->getRelativePathname();
-                
+
                 $this->registerViewComponent($component, $directory, $alias, $prefix);
             }
         });

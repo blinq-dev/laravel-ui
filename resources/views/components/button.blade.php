@@ -66,7 +66,8 @@ $iconColor = str($iconValue)->contains(' ') ? str($iconValue)->after(' ') : null
 <{{ $tag }} {{ $attributes->merge(['class' => "button $sizeClass $class", 'type' => 'button']) }}>
     {{-- Left --}}
     @if($iconId && !$isRight)
-        <x-icon class='icon icon-left {{ $iconColor }}' :id='$iconId' />
+        <x-dynamic-component :component="dynamic_blinq_icons_component('icon')" class='icon icon-left {{ $iconColor }}' :id='$iconId' />
+        {{-- <x-icon class='icon icon-left {{ $iconColor }}' :id='$iconId' /> --}}
     @endif
     @if(isset($left))
         {{ $left }}
@@ -78,6 +79,7 @@ $iconColor = str($iconValue)->contains(' ') ? str($iconValue)->after(' ') : null
         {{ $right }}
     @endif
     @if($iconId && $isRight)
-        <x-icon class='icon icon-right {{ $iconColor }}' :id='$iconId' />
+        {{-- <x-icon class='icon icon-right {{ $iconColor }}' :id='$iconId' /> --}}
+        <x-dynamic-component :component="dynamic_blinq_icons_component('icon')" class='icon icon-right {{ $iconColor }}' :id='$iconId' />
     @endif
 </{{ $tag }}>
